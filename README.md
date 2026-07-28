@@ -1,17 +1,11 @@
-# AutumnPants · Resume
+# AutumnPants · 简历
 
-> resume.qijunhao.com
+> [resume.qijunhao.com](https://resume.qijunhao.com) — 简历
 
-## 技术栈
+## 内容
 
-- 静态 HTML + CSS + JavaScript
-- 响应式设计
-- 浅色/深色主题切换
+戚俊皓的个人简历，包含教育背景、实习经历、项目实践等。
 
-## 部署
+## 构建
 
-GitHub Pages + CNAME 自定义域名。推送 `main` 分支自动部署。
-
----
-
-© 2025 [Qi JunHao](https://qijunhao.com). Built with ♥.
+纯静态 HTML + CSS + JavaScript，通用导航栏 + 语言切换，通过 GitHub Pages 部署。
