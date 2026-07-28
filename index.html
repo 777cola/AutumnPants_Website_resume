@@ -1093,23 +1093,25 @@
     <canvas id="bgPathsCanvas"></canvas>
   </div>
 
-  <!-- Navigation -->
-  <nav class="navbar" id="navbar">
-    <div class="nav-inner">
-      <a href="https://qijunhao.com" class="nav-logo">Qi JunHao<span class="dot">.</span></a>
-      <div class="nav-gooey" id="navGooey"></div>
-      <div class="nav-right">
-        <div class="lang-toggle" id="langToggle">
-          <span class="lang-item active" data-lang="zh" data-full="简体中文">简</span>
-          <span class="lang-item" data-lang="en" data-full="English">EN</span>
-          <span class="lang-item" data-lang="hant" data-full="繁體中文">繁</span>
-        </div>
-        <button class="theme-toggle" id="themeToggle" aria-label="切换主题">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-        </button>
+<!-- ============ NAVBAR ============ -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">Qi JunHao<span class="dot">.</span></a>
+
+    <div class="nav-gooey" id="navGooey"></div>
+
+    <div class="nav-right">
+      <div class="lang-toggle" id="langToggle">
+        <span class="lang-item" data-lang="zh" data-full="简体中文">简</span>
+        <span class="lang-item" data-lang="en" data-full="English">EN</span>
+        <span class="lang-item" data-lang="hant" data-full="繁體中文">繁</span>
       </div>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      </button>
     </div>
-  </nav>
+  </div>
+</nav>
 
   <!-- Page Header -->
   <header class="page-header" style="position:relative;z-index:2;">
@@ -1756,7 +1758,6 @@
           ],
           animationTime: 600,
           particleCount: 12,
-          initialActiveIndex: 5,
         });
       }
     });

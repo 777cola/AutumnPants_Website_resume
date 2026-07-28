@@ -254,6 +254,36 @@ img { max-width: 100%; height: auto; display: block; }
   background: var(--accent-subtle);
 }
 
+/* ─── Language Toggle ──────────────────────────────── */
+.lang-toggle {
+  display: flex;
+  align-items: center;
+  height: 30px;
+  background: var(--accent-subtle);
+  border-radius: 20px;
+  padding: 2px;
+  gap: 0;
+  border: 1px solid var(--accent-border);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+.lang-toggle:hover { border-color: var(--accent); }
+.lang-item {
+  padding: 3px 8px;
+  font-size: .72rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: all .2s;
+  white-space: nowrap;
+  border-radius: 16px;
+  cursor: pointer;
+  user-select: none;
+  font-family: var(--font-body);
+  line-height: 1.4;
+}
+.lang-item.active { background: var(--accent); color: #fff; }
+.lang-item:not(.active):hover { color: var(--accent); }
+
 .nav-toggle {
   display: none;
   width: 38px;
@@ -298,12 +328,20 @@ img { max-width: 100%; height: auto; display: block; }
   [data-theme="dark"] .nav-links {
     background: rgba(15,23,42,0.98);
   }
-  .nav-links.active { display: flex; }
+  .nav-links { display: none; }
+  .nav-gooey { display: none; }
   .nav-links a { padding: 0.625rem 0.875rem; width: 100%; }
   .nav-toggle { display: block; }
 }
 
-/* GOOEY NAV */
+/* Mobile fallback: show nav-links when toggled */
+@media (max-width: 768px) {
+  .nav-links.active { display: flex; }
+}
+
+/* ============================================================
+   GOOEY NAV (navbar integration)
+   ============================================================ */
 .nav-gooey {
   flex: 1;
   display: flex;
@@ -311,17 +349,20 @@ img { max-width: 100%; height: auto; display: block; }
   align-items: center;
   height: 100%;
 }
+
 .gooey-nav-container {
   position: relative;
   height: 100%;
   display: flex;
   align-items: center;
 }
+
 .gooey-nav-container nav {
   display: flex;
   position: relative;
   transform: translate3d(0, 0, 0.01px);
 }
+
 .gooey-nav-container nav ul {
   display: flex;
   gap: 0.25rem;
@@ -333,6 +374,7 @@ img { max-width: 100%; height: auto; display: block; }
   color: var(--text);
   text-shadow: none;
 }
+
 .gooey-nav-container nav ul li {
   border-radius: 100vw;
   position: relative;
@@ -341,6 +383,7 @@ img { max-width: 100%; height: auto; display: block; }
   font-size: 0.875rem;
   font-weight: 500;
 }
+
 .gooey-nav-container nav ul li a {
   display: inline-block;
   padding: 0.4rem 0.875rem;
@@ -349,13 +392,16 @@ img { max-width: 100%; height: auto; display: block; }
   border-radius: 100vw;
   transition: background 0.25s ease;
 }
+
 .gooey-nav-container nav ul li a:hover {
   background: var(--accent-subtle);
 }
+
 .gooey-nav-container nav ul li.active a {
   color: var(--accent);
   background: var(--accent-subtle);
 }
+
 .gooey-nav-container .effect {
   position: absolute;
   left: 0;
@@ -366,7 +412,10 @@ img { max-width: 100%; height: auto; display: block; }
   pointer-events: none;
   z-index: 1;
 }
-.particle, .point {
+
+/* Particle styles */
+.particle,
+.point {
   display: block;
   opacity: 0;
   width: 20px;
@@ -374,6 +423,7 @@ img { max-width: 100%; height: auto; display: block; }
   border-radius: 100%;
   transform-origin: center;
 }
+
 .particle {
   --time: 5s;
   position: absolute;
@@ -381,28 +431,104 @@ img { max-width: 100%; height: auto; display: block; }
   left: calc(50% - 8px);
   animation: particle calc(var(--time)) ease 1 -350ms;
 }
+
 .point {
   background: var(--color, var(--accent));
   opacity: 1;
   animation: point calc(var(--time)) ease 1 -350ms;
 }
+
 @keyframes particle {
-  0% { transform: rotate(0deg) translate(calc(var(--start-x)), calc(var(--start-y))); opacity: 1; animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45); }
-  70% { transform: rotate(calc(var(--rotate) * 0.5)) translate(calc(var(--end-x) * 1.2), calc(var(--end-y) * 1.2)); opacity: 1; animation-timing-function: ease; }
-  85% { transform: rotate(calc(var(--rotate) * 0.66)) translate(calc(var(--end-x)), calc(var(--end-y))); opacity: 1; }
-  100% { transform: rotate(calc(var(--rotate) * 1.2)) translate(calc(var(--end-x) * 0.5), calc(var(--end-y) * 0.5)); opacity: 1; }
+  0% {
+    transform: rotate(0deg) translate(calc(var(--start-x)), calc(var(--start-y)));
+    opacity: 1;
+    animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45);
+  }
+  70% {
+    transform: rotate(calc(var(--rotate) * 0.5)) translate(calc(var(--end-x) * 1.2), calc(var(--end-y) * 1.2));
+    opacity: 1;
+    animation-timing-function: ease;
+  }
+  85% {
+    transform: rotate(calc(var(--rotate) * 0.66)) translate(calc(var(--end-x)), calc(var(--end-y)));
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(calc(var(--rotate) * 1.2)) translate(calc(var(--end-x) * 0.5), calc(var(--end-y) * 0.5));
+    opacity: 1;
+  }
 }
+
 @keyframes point {
-  0% { transform: scale(0); opacity: 0; animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45); }
-  25% { transform: scale(calc(var(--scale) * 0.25)); }
+  0% {
+    transform: scale(0);
+    opacity: 0;
+    animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45);
+  }
+  25% {
+    transform: scale(calc(var(--scale) * 0.25));
+  }
   38% { opacity: 1; }
-  65% { transform: scale(var(--scale)); opacity: 1; animation-timing-function: ease; }
-  85% { transform: scale(var(--scale)); opacity: 1; }
-  100% { transform: scale(var(--scale)); opacity: 0; }
+  65% {
+    transform: scale(var(--scale));
+    opacity: 1;
+    animation-timing-function: ease;
+  }
+  85% {
+    transform: scale(var(--scale));
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+/* ============================================================
+   LANGUAGE TOGGLE
+   ============================================================ */
+.lang-toggle {
+  display: flex;
+  align-items: center;
+  height: 30px;
+  background: var(--accent-subtle);
+  border-radius: 20px;
+  padding: 2px;
+  gap: 0;
+  position: relative;
+}
+
+.lang-item {
+  padding: 3px 10px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  border-radius: 16px;
+  font-family: var(--font-body, var(--font-cn));
+  cursor: pointer;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  position: relative;
+  z-index: 1;
+  user-select: none;
+}
+
+.lang-item.active {
+  background: var(--accent);
+  color: #fff;
+}
+
+.lang-item:hover:not(.active) {
+  color: var(--accent);
 }
 
 @media (max-width: 768px) {
-  .nav-gooey { display: none; }
+  .lang-toggle {
+    height: 28px;
+  }
+  .lang-item {
+    padding: 2px 6px;
+    font-size: 0.68rem;
+  }
 }
 
 /* ============================================================
