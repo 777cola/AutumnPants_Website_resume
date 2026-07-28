@@ -59,6 +59,13 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.lang-item').forEach(item => {
       item.classList.toggle('active', item.dataset.lang === lang);
     });
+    // Update GooeyNav labels
+    document.querySelectorAll('.gooey-nav-container nav ul li a').forEach(function(a, i) {
+      var keys = ['nav.home','nav.music','nav.travel','nav.photo','nav.sports','nav.resume','nav.contact'];
+      if (TRANSLATIONS[keys[i]] && TRANSLATIONS[keys[i]][lang]) {
+        a.textContent = TRANSLATIONS[keys[i]][lang];
+      }
+    });
   }
 
   // Lang toggle
