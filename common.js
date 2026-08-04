@@ -63,7 +63,7 @@
 
     // ─── Language Toggle ─────────────────────────────
     var langToggle = document.getElementById('langToggle');
-    var currentLang = Prefs.get(LANG_KEY) || 'zh';
+    var currentLang = (window.__PAGE_DEFAULT_LANG || Prefs.get(LANG_KEY) || 'zh');
 
     function applyLang(lang) {
       currentLang = lang;
@@ -98,6 +98,11 @@
           var key = m.getAttribute('data-i18n-meta');
           if (table[key]) m.setAttribute('content', table[key]);
         });
+        document.querySelectorAll('[data-i18n-aria]').forEach(function (el) {
+          var key = el.getAttribute('data-i18n-aria');
+          if (table[key]) el.setAttribute('aria-label', table[key]);
+        });
+        document.documentElement.setAttribute('lang', lang === 'en' ? 'en' : lang === 'hant' ? 'zh-Hant' : 'zh-CN');
       }
       var labels = NAV_LABELS[lang] || NAV_LABELS.zh;
       document.querySelectorAll('.gooey-nav-container nav ul li a').forEach(function (a, i) {
